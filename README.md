@@ -64,115 +64,14 @@ uniapplicationscraper/
 ├── .gitignore                    # Excludes venv, logs, and temporary files
 └── README.md                     # Auto-updating project documentation
 
-
-yaml
-Copy code
-
 ---
 
 ## ⚙️ Setup & Installation
 
-### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/<your-username>/uniapplicationscraper.git
-cd uniapplicationscraper
-2️⃣ Create & Activate Virtual Environment
-bash
-Copy code
-python -m venv venv
-venv\Scripts\activate    # On Windows
-3️⃣ Install Dependencies
-bash
-Copy code
-pip install -r requirements.txt
-4️⃣ Verify ChromeDriver Path
-Ensure you have the correct ChromeDriver path in
-scrapers/dhet_map_scraper.py
 
-python
-Copy code
-CHROMEDRIVER_PATH = "C:/path/to/chromedriver.exe"
-🚀 Usage
-Run the scraper from the terminal:
-
-bash
-Copy code
-python scrapers/dhet_map_scraper.py
-Once complete, the output will be saved at:
-
-bash
-Copy code
-data/sources.json
-To regenerate your README dynamically:
-
-bash
-Copy code
-python generate_readme.py
-📦 Example Output
-json
-Copy code
-[
-  {
-    "name": "University of Cape Town",
-    "type": "University",
-    "url": "https://www.uct.ac.za/",
-    "logo": "https://www.uct.ac.za/favicon.ico"
-  },
-  {
-    "name": "Durban University of Technology",
-    "type": "University",
-    "url": "https://www.dut.ac.za/",
-    "logo": "https://www.dut.ac.za/favicon.ico"
-  }
-]
-🧾 Logging
-All logs are automatically stored in /logs/:
-
-Success and error tracking
-
-Timestamped scraper sessions
-
-Progress monitoring
-
-🪄 Auto-Generated README
-The generate_readme.py script automatically:
-
-Inserts the last run timestamp
-
-Counts the number of institutions scraped
-
-Updates this README.md file dynamically
-
-Run:
-
-bash
-Copy code
-python generate_readme.py
-Example console output:
-
-yaml
-Copy code
-✅ README updated successfully at 2025-11-03 07:42
-📊 Total institutions: 212
-🧠 Contributing
-Pull requests and issue reports are welcome!
-Please make sure your changes pass the tests before submission:
-
-bash
-Copy code
-pytest tests/
-📜 License
-Licensed under the MIT License.
-You are free to modify, distribute, and use this project for educational or research purposes.
-
-🕓 Last Updated
-🗓️ Auto-generated on: {{timestamp}}
-🏫 Institutions Scraped: {{scraper_count}}
 
 💡 Maintainer
 Author: Sakhumuzi Khuzwayo
 Project Purpose: Enable accessible educational data extraction and system interoperability.
 
-yaml
-Copy code
 
