@@ -1,77 +1,123 @@
-# 🎓 University Application Scraper (DHET Map Extractor)
+🎓 University Application Scraper (DHET Map Extractor)
+![Python](https://img.shields.io/badge
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Selenium](https://img.shields.io/badge/Selenium-Automation-brightgreen.svg)
-![Status](https://img.shields.io/badge/Status-Active-success.svg)
-![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
+![Selenium](https://img.shields.io/badge/Selenium-Automation-bright
 
-> **Automated Web Scraper** that extracts South African higher education institutions from the official DHET (Department of Higher Education and Training) interactive map.  
-> The scraper stores structured data for further use in research, education portals, or analytics pipelines.
+![Status](https://img.shields.io/badge/Status-Active-success.svghttps://img.shields.io/badge/License-MIT-lightgrey.svg Web Scraper** that extracts data on South African higher education institutions from the official DHET (Department of Higher Education and Training) interactive map.
 
----
+The scraper outputs structured data for use in research, education portals, data analytics, and more.
 
-## 🧭 Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [Project Structure](#-project-structure)
-- [Setup & Installation](#-setup--installation)
-- [Usage](#-usage)
-- [Example Output](#-example-output)
-- [Logging](#-logging)
-- [Auto-Generated README](#-auto-generated-readme)
-- [License](#-license)
+🧭 Table of Contents
+Overview
 
----
+Features
 
-## 🧩 Overview
-The **University Application Scraper** automates data collection from DHET’s institutional map and extracts:
-- Institution names  
-- Institution type (TVET, University, etc.)  
-- Source URLs  
-- Timestamps of when data was scraped  
+Project Structure
 
-All outputs are stored in structured **JSON** format inside the `data/` directory.
+Setup & Installation
 
----
+Usage
 
-## ✨ Features
-✅ Headless browser automation via Selenium  
-✅ Dynamic marker extraction from the DHET map  
-✅ Error handling and retry mechanisms  
-✅ JSON output for easy integration  
-✅ Logger system for debugging and tracking  
-✅ Auto-generating dynamic README (with timestamp and scraper metrics)
+Example Output
 
----
+Logging
 
-## 🗂️ Project Structure
+Auto-Generated README
+
+License
+
+🧩 Overview
+The University Application Scraper automates data extraction from the interactive DHET institutional map to collect:
+
+Institution names
+
+Institution types (TVET colleges, Universities, etc.)
+
+Source URLs for reference
+
+Date and time stamps indicating when the data was scraped
+
+All collected data is saved in a structured JSON format located in the data/ directory for downstream consumption.
+
+✨ Features
+✅ Headless browser automation using Selenium for efficient scraping
+
+✅ Dynamic extraction of institution markers directly from the DHET map interface
+
+✅ Robust error handling and retry logic for scraping stability
+
+✅ JSON output format to facilitate easy integration with other systems
+
+✅ Detailed logging system to aid debugging and monitor scraping activity
+
+✅ Auto-generation of README including scraping timestamp and key metrics
+
+🗂️ Project Structure
+text
 uniapplicationscraper/
 ├── scrapers/
-│   ├── dhet_map_scraper.py       # Extracts DHET institution data from the map
-│   ├── scraper.py                # Main orchestrator — combines data sources
+│   ├── dhet_map_scraper.py       # Extracts institution data from DHET map
+│   ├── scraper.py                # Main orchestrator combining all scrapers
 │
 ├── utils/
-│   ├── logger.py                 # Handles logging configuration and formatting
+│   ├── logger.py                 # Logging setup and configuration
 │
 ├── tests/
-│   ├── test_scraper_output.py    # Validates scraper outputs and data integrity
+│   ├── test_scraper_output.py   # Unit tests for validating scraper output
 │
 ├── data/
-│   └── sources.json              # Auto-generated file containing scraped results
+│   └── sources.json              # Auto-generated JSON containing scraped data
 │
-├── generate_readme.py            # Dynamically rebuilds README with timestamp + stats
-├── requirements.txt              # Python dependencies
-├── .gitignore                    # Excludes venv, logs, and temporary files
-└── README.md                     # Auto-updating project documentation
+├── generate_readme.py            # Automatically rebuilds README with current stats and timestamp
+├── requirements.txt              # Python dependencies and versions
+├── .gitignore                    # Files and folders excluded from git (venv, logs, etc.)
+└── README.md                     # Project documentation (this file)
+⚙️ Setup & Installation
+Clone the repository:
 
----
+bash
+git clone https://github.com/yourusername/uniapplicationscraper.git
+cd uniapplicationscraper
+Create a Python virtual environment and activate it (optional but recommended):
 
-## ⚙️ Setup & Installation
+bash
+python3 -m venv venv
+source venv/bin/activate   # Linux/macOS
+venv\Scripts\activate      # Windows
+Install the required Python packages:
 
+bash
+pip install -r requirements.txt
+Ensure you have a compatible version of ChromeDriver or GeckoDriver installed and accessible in your system PATH for Selenium to operate.
 
+🚀 Usage
+Run the main scraper:
+
+bash
+python scrapers/scraper.py
+The output JSON file will be updated in the data/ directory.
+
+🖼️ Example Output
+A sample entry in data/sources.json looks like:
+
+json
+{
+  "institution_name": "University of Johannesburg",
+  "institution_type": "University",
+  "source_url": "https://www.dhet.gov.za/universities/uj",
+  "scraped_timestamp": "2025-11-03T08:00:00Z"
+}
+📜 Logging
+Logs are saved to logs/ directory with detailed scraper activity, errors, and timestamps. Tail the log file for real-time monitoring.
+
+📄 Auto-Generated README
+The project includes a script, generate_readme.py, that dynamically updates this README with the latest scrape timestamp and scraper metrics.
+
+📝 License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 💡 Maintainer
 Author: Sakhumuzi Khuzwayo
-Project Purpose: Enable accessible educational data extraction and system interoperability.
 
+Purpose: To enable accessible extraction of higher education data in South Africa for research and system interoperability.
 
