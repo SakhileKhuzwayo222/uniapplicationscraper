@@ -47,17 +47,23 @@ All outputs are stored in structured **JSON** format inside the `data/` director
 ## 🗂️ Project Structure
 uniapplicationscraper/
 ├── scrapers/
-│ ├── scraper.py # Main scraper controller
-│ ├── dhet_map_scraper.py # Extracts DHET institutions
+│   ├── dhet_map_scraper.py       # Extracts DHET institution data from the map
+│   ├── scraper.py                # Main orchestrator — combines data sources
+│
 ├── utils/
-│ ├── logger.py # Logging setup utility
-├── data/
-│ └── sources.json # Scraped output (auto-generated)
+│   ├── logger.py                 # Handles logging configuration and formatting
+│
 ├── tests/
-│ └── test_scraper_output.py # Validates scraper output
-├── generate_readme.py # Dynamic README generator
-├── README.md # This file (auto-updated)
-└── requirements.txt
+│   ├── test_scraper_output.py    # Validates scraper outputs and data integrity
+│
+├── data/
+│   └── sources.json              # Auto-generated file containing scraped results
+│
+├── generate_readme.py            # Dynamically rebuilds README with timestamp + stats
+├── requirements.txt              # Python dependencies
+├── .gitignore                    # Excludes venv, logs, and temporary files
+└── README.md                     # Auto-updating project documentation
+
 
 yaml
 Copy code
