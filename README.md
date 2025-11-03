@@ -1,193 +1,172 @@
-🎓 DHET Institution Scraper & Data Enrichment Pipeline
-Overview
+# 🎓 University Application Scraper (DHET Map Extractor)
 
-The DHET Institution Scraper is a data extraction and enrichment pipeline built to automatically source, clean, and structure data on South African universities and TVET colleges directly from the official Department of Higher Education and Training (DHET) map interface.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Selenium](https://img.shields.io/badge/Selenium-Automation-brightgreen.svg)
+![Status](https://img.shields.io/badge/Status-Active-success.svg)
+![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
-The goal of this project is to serve as the data foundation for the MatricLink system — enabling users to access accurate, validated, and enriched institutional data for use in education-related applications.
+> **Automated Web Scraper** that extracts South African higher education institutions from the official DHET (Department of Higher Education and Training) interactive map.  
+> The scraper stores structured data for further use in research, education portals, or analytics pipelines.
 
-🧭 Project Purpose
+---
 
-South Africa’s higher education landscape lacks easily accessible structured data for use in modern applications.
-This scraper automates that process by:
+## 🧭 Table of Contents
+- [Overview](#-overview)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Setup & Installation](#-setup--installation)
+- [Usage](#-usage)
+- [Example Output](#-example-output)
+- [Logging](#-logging)
+- [Auto-Generated README](#-auto-generated-readme)
+- [License](#-license)
 
-Extracting all institution names directly from the DHET interactive map.
+---
 
-Cleaning and validating the extracted data.
+## 🧩 Overview
+The **University Application Scraper** automates data collection from DHET’s institutional map and extracts:
+- Institution names  
+- Institution type (TVET, University, etc.)  
+- Source URLs  
+- Timestamps of when data was scraped  
 
-Optionally enriching institution data with URLs, types, and logos using intelligent inference (Mistral AI integration planned).
+All outputs are stored in structured **JSON** format inside the `data/` directory.
 
-Exporting a structured JSON file (sources.json) that can feed into downstream systems or APIs.
+---
 
-🏗️ System Architecture
+## ✨ Features
+✅ Headless browser automation via Selenium  
+✅ Dynamic marker extraction from the DHET map  
+✅ Error handling and retry mechanisms  
+✅ JSON output for easy integration  
+✅ Logger system for debugging and tracking  
+✅ Auto-generating dynamic README (with timestamp and scraper metrics)
+
+---
+
+## 🗂️ Project Structure
 uniapplicationscraper/
-│
 ├── scrapers/
-│   ├── dhet_map_scraper.py        # Extracts institution names from DHET map
-│   ├── scraper.py                 # Fetches and enriches data for each institution
-│
+│ ├── scraper.py # Main scraper controller
+│ ├── dhet_map_scraper.py # Extracts DHET institutions
 ├── utils/
-│   ├── logger.py                  # Provides color-coded console logging
-│   ├── cleaner.py                 # (Optional) Cleans and validates data
-│
+│ ├── logger.py # Logging setup utility
 ├── data/
-│   └── sources.json               # Output JSON file of all scraped institutions
-│
+│ └── sources.json # Scraped output (auto-generated)
 ├── tests/
-│   └── test_scraper_outputs.py    # Validates scraper output and JSON integrity
-│
-├── venv/                          # Python virtual environment (ignored in git)
-│
-└── README_WebScraper.md           # This file
+│ └── test_scraper_output.py # Validates scraper output
+├── generate_readme.py # Dynamic README generator
+├── README.md # This file (auto-updated)
+└── requirements.txt
 
-⚙️ Key Features
-🔹 1. Automated Institution Extraction
+yaml
+Copy code
 
-The scraper navigates the official DHET map (https://www.dhet.gov.za/SitePages/Map.aspx) using Selenium WebDriver to extract every educational marker (universities and TVET colleges).
+---
 
-🔹 2. Dynamic Content Handling
+## ⚙️ Setup & Installation
 
-Handles dynamically loaded content (JavaScript-driven map) using Selenium’s wait conditions and safe interaction with each map marker.
-
-🔹 3. Structured Output
-
-Outputs all results as structured JSON data under data/sources.json, sorted alphabetically and easily parsable by other systems.
-
-🔹 4. Intelligent Data Enrichment (Planned)
-
-Integrates with Mistral AI for automatic enrichment — including identifying missing logos, website URLs, and correct institution categories.
-
-🔹 5. Modular Design
-
-Each part of the pipeline (scraping, cleaning, enrichment, validation) is built as an independent, reusable Python module.
-
-💻 Installation Guide
-1️⃣ Clone the Repository
-git clone https://github.com/yourusername/uniapplicationscraper.git
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/<your-username>/uniapplicationscraper.git
 cd uniapplicationscraper
-
-2️⃣ Set Up a Virtual Environment
+2️⃣ Create & Activate Virtual Environment
+bash
+Copy code
 python -m venv venv
-source venv/bin/activate     # On Mac/Linux
-venv\Scripts\activate        # On Windows
-
+venv\Scripts\activate    # On Windows
 3️⃣ Install Dependencies
+bash
+Copy code
 pip install -r requirements.txt
+4️⃣ Verify ChromeDriver Path
+Ensure you have the correct ChromeDriver path in
+scrapers/dhet_map_scraper.py
 
-
-Example dependencies include:
-
-selenium
-beautifulsoup4
-requests
-pandas
-numpy
-
-4️⃣ Set ChromeDriver Path
-
-In dhet_map_scraper.py, update this line with your local path:
-
+python
+Copy code
 CHROMEDRIVER_PATH = "C:/path/to/chromedriver.exe"
-
 🚀 Usage
-🔸 Run the DHET Map Scraper
+Run the scraper from the terminal:
+
+bash
+Copy code
 python scrapers/dhet_map_scraper.py
+Once complete, the output will be saved at:
 
+bash
+Copy code
+data/sources.json
+To regenerate your README dynamically:
 
-➡ Extracts all institution names and saves them into data/sources.json.
-
-🔸 Run the Data Enricher / Web Info Scraper
-python scrapers/scraper.py
-
-
-➡ Uses sources.json to fetch more data (logos, types, websites) for each institution.
-
-🔸 Test Data Integrity
-python tests/test_scraper_outputs.py
-
-
-➡ Checks that the JSON file exists, is non-empty, valid, and correctly structured.
-
-🧩 Core Functions
-File	Function	Purpose
-dhet_map_scraper.py	scrape_dhet_institutions()	Extracts institution names from DHET map markers
-	get_marker_name()	Interacts safely with map popups to extract text
-	setup_driver()	Configures a headless Selenium ChromeDriver
-scraper.py	get_institution_info(url)	Fetches title and logo metadata from institution websites
-	main()	Coordinates data scraping and enrichment
-logger.py	setup_logger()	Provides color-coded and timestamped log output
-test_scraper_outputs.py	test_sources_json()	Validates and verifies sources.json integrity
-🧠 Planned AI Integration: Mistral
-
-A future phase introduces Mistral integration for intelligent enrichment and validation:
-
-Automatic Classification (University, TVET, Private)
-
-Domain Guessing (detect correct institution URL using model reasoning)
-
-Metadata Completion (logo, motto, city, province inference)
-
-Example prompt for enrichment:
-
-prompt = f"""
-Given this institution name: "{name}", return structured JSON with:
-- verified official website
-- institution type
-- logo URL
-- location (city, province)
-"""
-
-🧾 Output Format Example
+bash
+Copy code
+python generate_readme.py
+📦 Example Output
+json
+Copy code
 [
   {
-    "name": "University of Johannesburg",
+    "name": "University of Cape Town",
     "type": "University",
-    "url": "https://www.uj.ac.za/",
-    "logo": "https://www.uj.ac.za/favicon.ico"
+    "url": "https://www.uct.ac.za/",
+    "logo": "https://www.uct.ac.za/favicon.ico"
   },
   {
-    "name": "Sedibeng TVET College",
-    "type": "TVET College",
-    "url": "https://www.sedcol.co.za/",
-    "logo": "https://www.sedcol.co.za/favicon.ico"
+    "name": "Durban University of Technology",
+    "type": "University",
+    "url": "https://www.dut.ac.za/",
+    "logo": "https://www.dut.ac.za/favicon.ico"
   }
 ]
+🧾 Logging
+All logs are automatically stored in /logs/:
 
-🧪 Testing and Validation
+Success and error tracking
 
-All tests can be run independently using:
+Timestamped scraper sessions
 
+Progress monitoring
+
+🪄 Auto-Generated README
+The generate_readme.py script automatically:
+
+Inserts the last run timestamp
+
+Counts the number of institutions scraped
+
+Updates this README.md file dynamically
+
+Run:
+
+bash
+Copy code
+python generate_readme.py
+Example console output:
+
+yaml
+Copy code
+✅ README updated successfully at 2025-11-03 07:42
+📊 Total institutions: 212
+🧠 Contributing
+Pull requests and issue reports are welcome!
+Please make sure your changes pass the tests before submission:
+
+bash
+Copy code
 pytest tests/
+📜 License
+Licensed under the MIT License.
+You are free to modify, distribute, and use this project for educational or research purposes.
 
+🕓 Last Updated
+🗓️ Auto-generated on: {{timestamp}}
+🏫 Institutions Scraped: {{scraper_count}}
 
-Or manually:
+💡 Maintainer
+Author: Sakhumuzi Khuzwayo
+Project Purpose: Enable accessible educational data extraction and system interoperability.
 
-python tests/test_scraper_outputs.py
+yaml
+Copy code
 
-
-✅ The test checks:
-
-File existence
-
-Non-empty content
-
-JSON validity
-
-Correct data structure
-
-🧭 Future Enhancements
-
- AI enrichment using Mistral
-
- Integration with MatricLink Backend (C#) API
-
- Parallel scraping using asyncio or concurrent.futures
-
- Automatic database sync (PostgreSQL or MongoDB)
-
- Web dashboard for visualizing scrape progress
-
-👨‍💻 Author
-
-Developer: Sakhumuzi Khuzwayo
-Project: MatricLink Data Pipeline
-Purpose: Provide verified, structured data for educational applications in South Africa.
